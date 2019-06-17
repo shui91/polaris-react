@@ -15,6 +15,7 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 ### Bug fixes
 
 - Fixed issue with `Stack` where a `Stack.Item` was not getting a minimum width ([2273](https://github.com/Shopify/polaris-react/pull/2273))
+- Fixed `PositionedOverlay` incorrectly calculating `Topbar.UserMenu` `Popover` width ([#1692](https://github.com/Shopify/polaris-react/pull/1692))
 
 ### Documentation
 
