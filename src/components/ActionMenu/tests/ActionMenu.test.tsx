@@ -44,6 +44,25 @@ describe('<ActionMenu />', () => {
         mockActions,
       );
     });
+
+    it('renders actions according to their overridden index when set', () => {
+      const overriddenIndex = 1;
+      const actionWithIndex = {
+        content: 'mock content 1',
+        index: overriddenIndex,
+      };
+
+      const actions: Props['actions'] = [
+        actionWithIndex,
+        {content: 'mock content 2'},
+      ];
+
+      const wrapper = mountWithAppProvider(<ActionMenu actions={actions} />);
+
+      expect(wrapper.find(MenuAction).at(overriddenIndex).text).toBe(
+        actionWithIndex.content,
+      );
+    });
   });
 
   describe('groups', () => {
@@ -81,6 +100,25 @@ describe('<ActionMenu />', () => {
       expect(wrapper.find(RollupActions).prop('sections')).toStrictEqual(
         convertedSections,
       );
+    });
+
+    it('renders groups in their set index', () => {
+      const overriddenIndex = 1;
+      const groupWithIndex = {
+        title: 'group with explicit order in menu',
+        actions: [{content: 'mock content 1'}],
+        index: 0,
+      };
+      const groups = [...mockGroups, groupWithIndex];
+
+      const wrapper = mountWithAppProvider(<ActionMenu groups={groups} />);
+
+      expect(
+        wrapper
+          .find(MenuGroup)
+          .at(overriddenIndex)
+          .prop('title'),
+      ).toBe(groupWithIndex.title);
     });
   });
 
