@@ -91,6 +91,7 @@ export function calculateHorizontalPosition(
   preferredAlignment: PreferredAlignment,
 ) {
   const maximum = containerRect.width - overlayRect.width;
+  const borderWidth = 2;
 
   if (preferredAlignment === 'left') {
     return Math.min(
@@ -104,7 +105,7 @@ export function calculateHorizontalPosition(
       maximum -
       Math.max(
         0,
-        activatorRight - (overlayRect.width - overlayMargins.horizontal) - 2,
+        activatorRight - (overlayRect.width - overlayMargins.horizontal) - borderWidth,
       )
     );
   }
