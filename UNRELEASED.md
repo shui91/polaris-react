@@ -20,6 +20,8 @@ Use [the changelog guidelines](https://git.io/polaris-changelog-guidelines) to f
 
 ### Dependency upgrades
 
+- Upgraded to TypeScript `v3.6.3` ([#2237](https://github.com/Shopify/polaris-react/pull/2237))
+
 ### Code quality
 
 - Improved code quality for the theme provider component ([#2225](https://github.com/Shopify/polaris-react/pull/2225)):
