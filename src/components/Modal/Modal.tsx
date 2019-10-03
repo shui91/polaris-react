@@ -225,6 +225,7 @@ class Modal extends React.Component<CombinedProps, State> {
       polaris: {intl},
       onScrolledToBottom,
       activator,
+      onClose,
     } = this.props;
 
     const {iframeHeight} = this.state;
@@ -276,16 +277,12 @@ class Modal extends React.Component<CombinedProps, State> {
       );
 
       const headerMarkup = title ? (
-        <Header
-          id={this.headerId}
-          onClose={this.handleOnClose}
-          testID="ModalHeader"
-        >
+        <Header id={this.headerId} onClose={onClose} testID="ModalHeader">
           {title}
         </Header>
       ) : (
         <CloseButton
-          onClick={this.handleOnClose}
+          onClick={onClose}
           title={false}
           testID="ModalCloseButton"
         />
@@ -297,7 +294,7 @@ class Modal extends React.Component<CombinedProps, State> {
         <Dialog
           instant={instant}
           labelledBy={labelledBy}
-          onClose={this.handleOnClose}
+          onClose={onClose}
           onEntered={this.handleEntered}
           onExited={this.handleExited}
           large={large}
@@ -330,12 +327,6 @@ class Modal extends React.Component<CombinedProps, State> {
       </WithinContentContext.Provider>
     );
   }
-
-  private handleOnClose = () => {
-    const {onClose} = this.props;
-
-    onClose();
-  };
 
   private handleEntered = () => {
     const {onTransitionEnd} = this.props;
