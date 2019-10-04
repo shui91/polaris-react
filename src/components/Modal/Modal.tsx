@@ -77,7 +77,7 @@ export interface ModalProps extends FooterProps {
   onTransitionEnd?(): void;
   /** Callback when the bottom of the modal content is reached */
   onScrolledToBottom?(): void;
-  /** Element that opens and closes the modal */
+  /** The element that activates the Modal */
   activator?: React.ReactElement;
 }
 type CombinedProps = ModalProps & WithAppProviderProps;
