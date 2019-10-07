@@ -4,6 +4,7 @@ import {
   focusFirstFocusableNode,
   findFirstFocusableNode,
 } from '@shopify/javascript-utilities/focus';
+import {focusNextFocusableNode} from '../../utilities/focus';
 
 import {PreferredPosition, PreferredAlignment} from '../PositionedOverlay';
 import {Portal} from '../Portal';
@@ -135,7 +136,9 @@ export class Popover extends React.PureComponent<PopoverProps, State> {
       source === CloseSource.FocusOut ||
       source === CloseSource.EscapeKeypress
     ) {
-      focusFirstFocusableNode(this.activatorContainer, false);
+      if (!focusNextFocusableNode(this.activatorContainer)) {
+        focusFirstFocusableNode(this.activatorContainer, false);
+      }
     }
   };
 

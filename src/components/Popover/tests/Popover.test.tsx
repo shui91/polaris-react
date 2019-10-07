@@ -1,6 +1,8 @@
 import React from 'react';
 import {mountWithAppProvider, findByTestID} from 'test-utilities/legacy';
+import {mountWithApp} from 'test-utilities';
 import {Popover} from '../Popover';
+import {PopoverOverlay} from '../components';
 
 describe('<Popover />', () => {
   const spy = jest.fn();
@@ -182,4 +184,43 @@ describe('<Popover />', () => {
 
     expect(onCloseSpy).not.toHaveBeenCalled();
   });
+
+  it('focuses the next available element when the popover is closed', () => {
+    const id = 'focus-target';
+    function PopoverTest() {
+      return (
+        <React.Fragment>
+          <Popover active activator={<div />} onClose={noop} />
+          <button id={id} />
+        </React.Fragment>
+      );
+    }
+
+    const popover = mountWithApp(<PopoverTest />);
+
+    popover.find(PopoverOverlay)!.trigger('onClose', 1);
+    const focusTarget = popover.find('button', {id})!.domNode;
+
+    expect(document.activeElement).toBe(focusTarget);
+  });
+
+  it('focuses the activator when another focusable element is not available when the popover is closed', () => {
+    const id = 'activator';
+    function PopoverTest() {
+      return (
+        <React.Fragment>
+          <Popover active activator={<button id={id} />} onClose={noop} />
+        </React.Fragment>
+      );
+    }
+
+    const popover = mountWithApp(<PopoverTest />);
+
+    popover.find(PopoverOverlay)!.trigger('onClose', 1);
+    const focusTarget = popover.find('button', {id})!.domNode;
+
+    expect(document.activeElement).toBe(focusTarget);
+  });
 });
+
+function noop() {}
