@@ -311,13 +311,9 @@ class Modal extends React.Component<CombinedProps, State> {
 
     const animated = !instant;
 
-    const trigger = activator
-      ? React.cloneElement(activator, {ref: this.activatorRef})
-      : null;
-
     return (
       <WithinContentContext.Provider value>
-        {trigger}
+        <div ref={this.activatorRef}>{activator}</div>
         <Portal idPrefix="modal">
           <TransitionGroup appear={animated} enter={animated} exit={animated}>
             {dialog}
@@ -346,7 +342,7 @@ class Modal extends React.Component<CombinedProps, State> {
 
     this.activatorRef &&
       this.activatorRef.current &&
-      this.activatorRef.current.focus();
+      focusFirstFocusableNode(this.activatorRef.current);
   };
 
   private handleIFrameLoad = (evt: React.SyntheticEvent<HTMLIFrameElement>) => {

@@ -1,4 +1,4 @@
-import React, {forwardRef, useImperativeHandle} from 'react';
+import React from 'react';
 import {CaretDownMinor} from '@shopify/polaris-icons';
 import {classNames, variationName} from '../../utilities/css';
 import {handleMouseUpByBlurring} from '../../utilities/focus';
@@ -79,50 +79,37 @@ export interface ButtonProps {
 
 const DEFAULT_SIZE = 'medium';
 
-// eslint-disable-next-line react/display-name
-export const Button = forwardRef(function(
-  {
-    id,
-    url,
-    disabled,
-    loading,
-    children,
-    accessibilityLabel,
-    ariaControls,
-    ariaExpanded,
-    ariaPressed,
-    onClick,
-    onFocus,
-    onBlur,
-    onKeyDown,
-    onKeyPress,
-    onKeyUp,
-    external,
-    download,
-    icon,
-    primary,
-    outline,
-    destructive,
-    disclosure,
-    plain,
-    monochrome,
-    submit,
-    size = DEFAULT_SIZE,
-    textAlign,
-    fullWidth,
-  }: ButtonProps,
-  ref,
-) {
+export function Button({
+  id,
+  url,
+  disabled,
+  loading,
+  children,
+  accessibilityLabel,
+  ariaControls,
+  ariaExpanded,
+  ariaPressed,
+  onClick,
+  onFocus,
+  onBlur,
+  onKeyDown,
+  onKeyPress,
+  onKeyUp,
+  external,
+  download,
+  icon,
+  primary,
+  outline,
+  destructive,
+  disclosure,
+  plain,
+  monochrome,
+  submit,
+  size = DEFAULT_SIZE,
+  textAlign,
+  fullWidth,
+}: ButtonProps) {
   const intl = useI18n();
-  const buttonRef = React.useRef<HTMLButtonElement>(null);
-
-  useImperativeHandle(ref, () => ({
-    focus: () => {
-      const element = buttonRef.current;
-
-      element && element.focus();
-    },
-  }));
 
   const isDisabled = disabled || loading;
 
@@ -221,7 +208,6 @@ export const Button = forwardRef(function(
 
   return (
     <button
-      ref={buttonRef}
       id={id}
       type={type}
       onClick={onClick}
@@ -243,7 +229,7 @@ export const Button = forwardRef(function(
       {content}
     </button>
   );
-});
+}
 
 export function IconWrapper({children}: any) {
   return <span className={styles.Icon}>{children}</span>;
