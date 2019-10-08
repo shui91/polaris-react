@@ -111,7 +111,7 @@ class Modal extends React.Component<CombinedProps, State> {
     | AppBridgeModal.ModalIframe
     | undefined;
 
-  private activatorRef = React.createRef<HTMLElement>();
+  private activatorRef = React.createRef<HTMLDivElement>();
 
   componentDidMount() {
     if (this.props.polaris.appBridge == null) {
