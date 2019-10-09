@@ -12,6 +12,11 @@ $context-control-expand-after: 1400px;
   height: top-bar-height();
   background-color: var(--top-bar-background);
   padding-right: spacing(tight);
+
+  @include breakpoint-before(layout-width(page-with-nav), false) {
+    padding-right: 0;
+  }
+
   &::after {
     content: '';
     position: absolute;
@@ -100,19 +105,23 @@ $context-control-expand-after: 1400px;
   margin: 0;
   max-width: none;
   margin-left: calc((100% - #{$page-max-width}) / 2);
+  background: red;
 
   @include breakpoint-after($context-control-expand-after) {
     margin-left: calc(
       (100% - #{$page-max-width + $context-control-extra-spacing}) / 2
     );
+    background: blue;
   }
 
   @media (max-width: $page-left-alignment-breakpoint-max) {
     margin-left: 0;
+    background: green;
   }
 
   @include breakpoint-after($not-condensed-content) {
     position: relative;
+    background: yellow;
   }
 }
 
