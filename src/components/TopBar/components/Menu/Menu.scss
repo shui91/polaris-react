@@ -21,7 +21,7 @@ $activator-variables: (
   margin-right: spacing(tight);
 
   @include breakpoint-before(layout-width(page-with-nav), false) {
-    margin-right: 0;
+    margin: 0 spacing(extra-tight);
   }
 }
 
@@ -56,8 +56,6 @@ $activator-variables: (
   }
 
   @include breakpoint-before(layout-width(page-with-nav), false) {
-    margin: 0 spacing(extra-tight);
-
     &:focus,
     &:hover,
     &:active,
