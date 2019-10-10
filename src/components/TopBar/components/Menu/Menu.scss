@@ -18,6 +18,11 @@ $activator-variables: (
   height: top-bar-height();
   display: flex;
   align-items: center;
+  margin-right: spacing(tight);
+
+  @include breakpoint-before(layout-width(page-with-nav), false) {
+    margin-right: 0;
+  }
 }
 
 .Activator {

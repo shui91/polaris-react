@@ -11,11 +11,6 @@ $context-control-expand-after: 1400px;
   display: flex;
   height: top-bar-height();
   background-color: var(--top-bar-background);
-  padding-right: spacing(tight);
-
-  @include breakpoint-before(layout-width(page-with-nav), false) {
-    padding-right: 0;
-  }
 
   &::after {
     content: '';
