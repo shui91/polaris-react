@@ -340,8 +340,7 @@ class Modal extends React.Component<CombinedProps, State> {
       write(() => focusFirstFocusableNode(this.focusReturnPointNode, false));
     }
 
-    this.activatorRef &&
-      this.activatorRef.current &&
+    this.activatorRef.current &&
       focusFirstFocusableNode(this.activatorRef.current);
   };
 
