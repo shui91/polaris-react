@@ -46,22 +46,25 @@ describe('<ActionMenu />', () => {
     });
 
     it('renders actions according to their overridden index when set', () => {
-      const overriddenIndex = 1;
+      const overrideIndex = 1;
       const actionWithIndex = {
-        content: 'mock content 1',
-        index: overriddenIndex,
+        content: 'mock content 0',
+        index: overrideIndex,
       };
 
-      const actions: Props['actions'] = [
+      const actions: ActionMenuProps['actions'] = [
         actionWithIndex,
-        {content: 'mock content 2'},
+        {content: 'mock content 1'},
       ];
 
       const wrapper = mountWithAppProvider(<ActionMenu actions={actions} />);
 
-      expect(wrapper.find(MenuAction).at(overriddenIndex).text).toBe(
-        actionWithIndex.content,
-      );
+      expect(
+        wrapper
+          .find(MenuAction)
+          .at(overrideIndex)
+          .text(),
+      ).toBe(actionWithIndex.content);
     });
   });
 
@@ -103,20 +106,20 @@ describe('<ActionMenu />', () => {
     });
 
     it('renders groups in their set index', () => {
-      const overriddenIndex = 1;
+      const overrideIndex = 1;
       const groupWithIndex = {
         title: 'group with explicit order in menu',
         actions: [{content: 'mock content 1'}],
-        index: 0,
+        index: overrideIndex,
       };
-      const groups = [...mockGroups, groupWithIndex];
 
+      const groups = [...mockGroups, groupWithIndex];
       const wrapper = mountWithAppProvider(<ActionMenu groups={groups} />);
 
       expect(
         wrapper
           .find(MenuGroup)
-          .at(overriddenIndex)
+          .at(overrideIndex)
           .prop('title'),
       ).toBe(groupWithIndex.title);
     });
@@ -162,7 +165,7 @@ describe('<ActionMenu />', () => {
         },
       ];
       const wrapper = mountWithAppProvider(
-        <ActionMenu {...mockProps} groups={mockGroupsWithoutActions} />,
+        <ActionMenu groups={mockGroupsWithoutActions} />,
       );
 
       expect(wrapper.find(MenuGroup)).toHaveLength(0);

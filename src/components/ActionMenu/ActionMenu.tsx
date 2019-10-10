@@ -62,6 +62,10 @@ export class ActionMenu extends React.PureComponent<ActionMenuProps, State> {
       ...groups,
     ]);
 
+    if (overriddenActions.length === 0) {
+      return;
+    }
+
     const actionMarkup = overriddenActions.map((action, index) => {
       if (action.hasOwnProperty('title')) {
         const {title, ...rest} = action as MenuGroupDescriptor;
