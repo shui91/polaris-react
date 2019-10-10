@@ -29,6 +29,39 @@ $destructive-pressed-light: rgb(167, 41, 18);
 $destructive-pressed-dark: rgb(117, 4, 10);
 // darken(color('red', 'dark'), 20%)
 $destructive-pressed-darkest: rgb(93, 3, 8);
+$partial-button-filled-pressed-box-shadow: inset 0 0 0 0 transparent,
+  inset 0 1px 1px 0 rgba(22, 29, 37, 0.05), inset 0 0 3px 0;
+
+@mixin pressed-box-shadow($color: transparent) {
+  box-shadow: 0 0 0 1px $color,
+    inset 0 1px 1px 0 rgba(color('ink', 'lighter'), 0.1),
+    inset 0 1px 4px 0 rgba(color('ink', 'lighter'), 0.1);
+}
+
+@mixin button-filled-pressed(
+  $color-lightest,
+  $color-light,
+  $color-dark,
+  $color-darkest
+) {
+  background: linear-gradient(to bottom, $color-lightest, $color-lightest);
+  border-color: $color-dark;
+  box-shadow: $partial-button-filled-pressed-box-shadow $color-dark;
+
+  &:focus,
+  &:hover {
+    transition-duration: duration(fast);
+    background: linear-gradient(to bottom, $color-light, $color-light);
+    border-color: $color-dark;
+    box-shadow: $partial-button-filled-pressed-box-shadow$color-dark;
+  }
+
+  &:active {
+    background: linear-gradient(to bottom, $color-lightest, $color-lightest);
+    border-color: $color-dark;
+    box-shadow: $partial-button-filled-pressed-box-shadow$color-darkest;
+  }
+}
 
 .Button {
   @include button-base;
