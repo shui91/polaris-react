@@ -279,10 +279,12 @@ function ModalExample() {
 
   const handleChange = useCallback(() => setActive(!active), [active]);
 
+  const activator = <Button onClick={handleChange}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={handleChange}>Open</Button>
       <Modal
+        activator={activator}
         open={active}
         onClose={handleChange}
         title="Reach more shoppers with Instagram product tags"
@@ -337,10 +339,12 @@ function ModalWithPrimaryActionExample() {
 
   const toggleModal = useCallback(() => setActive((active) => !active), []);
 
+  const activator = <Button onClick={toggleModal}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={toggleModal}>Open</Button>
       <Modal
+        activator={activator}
         open={active}
         onClose={toggleModal}
         title="Get a shareable link"
@@ -428,10 +432,12 @@ function ModalWithPrimaryAndSecondaryActionsExample() {
     [],
   );
 
+  const activator = <Button onClick={handleModalChange}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={handleModalChange}>Open</Button>
       <Modal
+        activator={activator}
         open={active}
         onClose={handleClose}
         title="Export customers"
@@ -510,11 +516,13 @@ function LargeModalExample() {
 
   const handleCheckbox = useCallback((value) => setChecked(value), []);
 
+  const activator = <Button onClick={toggleActive}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={toggleActive}>Open</Button>
       <Modal
         large
+        activator={activator}
         open={active}
         onClose={toggleActive}
         title="Import customers by CSV"
@@ -564,10 +572,12 @@ function ModalWithoutTitleExample() {
 
   const handleChange = useCallback(() => setActive(!active), [active]);
 
+  const activator = <Button onClick={handleChange}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={handleChange}>Open</Button>
       <Modal
+        activator={activator}
         open={active}
         onClose={handleChange}
         primaryAction={{
@@ -610,10 +620,12 @@ function ModalWithScrollListenerExample() {
 
   const handleScrollBottom = useCallback(() => alert('Scrolled to bottom'), []);
 
+  const activator = <Button onClick={handleChange}>Open</Button>;
+
   return (
     <div style={{height: '500px'}}>
-      <Button onClick={handleChange}>Open</Button>
       <Modal
+        activator={activator}
         open={active}
         title="Scrollable content"
         onClose={handleChange}
@@ -684,6 +696,7 @@ See Apple’s Human Interface Guidelines and API documentation about accessibili
 
 - Modals use ARIA `role=”dialog”` to convey to screen reader users that they work like native dialog windows.
 - If you set the `title` prop to give the modal component a heading, then the `title` is used to label the dialog element with `aria-labelledby`. This helps to convey the purpose of the modal to screen reader users when it displays.
+- After a modal is closed, in order to return focus to the button that launched it, pass the button to the modal as an `activator`.
 
 ### Keyboard support
 
