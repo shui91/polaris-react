@@ -644,6 +644,62 @@ function ModalWithScrollListenerExample() {
 }
 ```
 
+### External activator
+
+<!-- example-for: web -->
+
+Use an external activator when technical limitations prevent you from passing it as a prop. Make sure to focus the activator on close when choosing this approach.
+See the [accessibility features of a modal](https://www.w3.org/TR/wai-aria-practices/examples/dialog-modal/dialog.html) for more information regarding focus.
+
+```jsx
+function ModalExample() {
+  const [active, setActive] = useState(true);
+
+  const button = useRef();
+
+  const handleOpen = useCallback(() => setActive(true), []);
+
+  const handleClose = useCallback(() => {
+    setActive(false);
+    button.current.querySelector('button').focus();
+  }, []);
+
+  return (
+    <div style={{height: '500px'}}>
+      <div ref={button}>
+        <Button onClick={handleOpen}>Open</Button>
+      </div>
+      <Modal
+        instant
+        open={active}
+        onClose={handleClose}
+        title="Reach more shoppers with Instagram product tags"
+        primaryAction={{
+          content: 'Add Instagram',
+          onAction: handleClose,
+        }}
+        secondaryActions={[
+          {
+            content: 'Learn more',
+            onAction: handleClose,
+          },
+        ]}
+      >
+        <Modal.Section>
+          <TextContainer>
+            <p>
+              Use Instagram posts to share your products with millions of
+              people. Let shoppers buy from your store without leaving
+              Instagram.
+            </p>
+          </TextContainer>
+        </Modal.Section>
+      </Modal>
+    </div>
+  );
+}
+```
+
 ### Warning modal
 
 <!-- example-for: android, ios -->
